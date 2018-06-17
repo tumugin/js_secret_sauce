@@ -1,7 +1,9 @@
 'use strict'
 
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const utils = require('./utils')
 const rm = require('rimraf')
@@ -9,6 +11,11 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
+
+//define default public URL
+// const publicUrl = 'http://exmaple.com';
+const publicUrl = '.';
+if(process.env.PUBLIC_URL === undefined) process.env.PUBLIC_URL = publicUrl
 
 //delete dist files
 rm.sync(resolve('dist'))
@@ -33,7 +40,7 @@ module.exports = {
         include: [resolve('src'), resolve('test')]
       },
       // {
-      //   test: /\.(js|vue)$/,
+      //   test: /\.(js|jsx|ts|tsx)$/,
       //   use: 'eslint-loader',
       //   enforce: 'pre'
       // },
@@ -81,6 +88,20 @@ module.exports = {
 
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL)
+    }),
+    new SWPrecacheWebpackPlugin({
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        console.log(message);
+      },
+      minify: true,
+      navigateFallback: process.env.PUBLIC_URL + '/index.html',
+      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './public/index.html',
