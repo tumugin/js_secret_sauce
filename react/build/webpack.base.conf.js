@@ -36,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: [/\.ts$/, /\.tsx$/],
-        loader: 'ts-loader',
+        loader: 'babel-loader!ts-loader',
         include: [resolve('src'), resolve('test')]
       },
       // {
