@@ -19,6 +19,7 @@ module.exports = merge(baseConfig, {
     host: HOST,
     port: PORT,
     open: true,
+    historyApiFallback: true
     //overlay: { warnings: false, errors: true },
     //publicPath: '/',
     //quiet: true,
@@ -40,9 +41,17 @@ module.exports = merge(baseConfig, {
         test: /\.styl(us)?$/,
         use: [
           'style-loader',
-          'css-loader',
+          'css-loader?modules',
           'postcss-loader',
           'stylus-loader'
+        ]
+      }, {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader?modules',
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -51,7 +60,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     //new webpack.HotModuleReplacementPlugin()
   ],
-  
+
   optimization: {
     namedModules: true,
     noEmitOnErrors: true,

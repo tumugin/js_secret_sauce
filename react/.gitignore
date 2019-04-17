@@ -8,6 +8,8 @@
 
 # production
 /dist
+/prod
+/.firebase
 
 # misc
 .DS_Store
@@ -19,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# idea
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
