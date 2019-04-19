@@ -15,17 +15,16 @@ function resolve(dir) {
 rm.sync(resolve('dist'))
 
 module.exports = {
+  output: {
+    path: resolve('dist')
+  },
   entry: {
-    app: './src/main.js'
+    app: './src/main.ts'
   },
 
   resolve: {
     extensions: ['.js', '.vue', '.json', '.ts'],
     alias: {
-      //'assets': utils.resolve('assets'),
-      //'pages': utils.resolve('src/pages'),
-      //'static': utils.resolve('static'),
-      //'components': utils.resolve('src/components'),
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src')
     }
@@ -34,18 +33,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        loader: 'ts-loader',
+        test: [/\.ts$/],
+        loader: 'babel-loader!ts-loader',
         include: [resolve('src'), resolve('test')],
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }
       },
-      // {
-      //   test: /\.(js|vue)$/,
-      //   use: 'eslint-loader',
-      //   enforce: 'pre'
-      // },
       {
         test: /\.vue$/,
         use: {
@@ -59,7 +53,7 @@ module.exports = {
               // other preprocessors should work out of the box, no loader config like this necessary.
               'scss': 'vue-style-loader!css-loader!postcss-loader!sass-loader',
               'sass': 'vue-style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax',
-              'ts': 'ts-loader'
+              'css': 'vue-style-loader!css-loader!postcss-loader'
             }
             // other vue-loader options go here
           }
@@ -68,10 +62,7 @@ module.exports = {
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            compact: 'false'
-          }
+          loader: 'babel-loader'
         }
       },
       {
@@ -111,7 +102,7 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: './public/index.html',
       inject: true
     }),
     new VueLoaderPlugin(),
