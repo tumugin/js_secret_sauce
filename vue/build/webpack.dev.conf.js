@@ -32,17 +32,25 @@ module.exports = merge(baseConfig, {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
+          'style-loader',
+          'css-loader?modules',
           'postcss-loader'
         ]
       }, {
         test: /\.styl(us)?$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
+          'style-loader',
+          'css-loader?modules',
           'postcss-loader',
           'stylus-loader'
+        ]
+      }, {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader?modules',
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -51,7 +59,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     //new webpack.HotModuleReplacementPlugin()
   ],
-  
+
   optimization: {
     namedModules: true,
     noEmitOnErrors: true,

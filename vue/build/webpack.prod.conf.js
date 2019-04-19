@@ -23,18 +23,27 @@ module.exports = merge(baseConfig, {
       {
         test: /\.css?$/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          'css-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader?modules',
           'postcss-loader'
         ]
       },
       {
         test: /\.styl(us)?$/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          'css-loader', 
+          MiniCssExtractPlugin.loader,
+          'css-loader?modules',
           'postcss-loader',
           'stylus-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader?modules',
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
