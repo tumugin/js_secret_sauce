@@ -5,7 +5,7 @@
   "author": "Kazuki Oishi <oishikazuki@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-serve --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --progress --config build/webpack.dev.conf.js",
     "builddev": "webpack --progress --config build/webpack.noserverdev.conf.js",
     "prod": "webpack --progress --config build/webpack.prod.conf",
     "lint": "eslint --ext .js,.vue src",

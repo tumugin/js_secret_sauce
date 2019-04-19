@@ -1,7 +1,17 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators'
 import Vuex from 'vuex'
+import Vue from 'vue'
 
-@Module
+Vue.use(Vuex)
+
+interface AppStore {
+  mainstore: MainStoreVuexModule
+}
+
+const appstore = new Vuex.Store<AppStore>({})
+export default appstore
+
+@Module({ dynamic: true, name: 'mainstore', store: appstore })
 class MainStoreVuexModule extends VuexModule {
   mano = false
   hiori = false
@@ -16,11 +26,9 @@ class MainStoreVuexModule extends VuexModule {
     this.hiori = param
   }
   @Mutation
-  publicsetMeguru(param: boolean) {
+  public setMeguru(param: boolean) {
     this.meguru = param
   }
 }
 
 export const MainStoreModule = getModule(MainStoreVuexModule)
-const store = new Vuex.Store({ state: {}, modules: { MainStoreVuexModule } })
-export default store
