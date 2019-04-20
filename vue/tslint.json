@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "ordered-imports": false,
+    "trailing-comma": false,
+    "member-access": false,
+    "no-console": false,
+    "arrow-parens": false,
+    "max-classes-per-file": false,
+    "max-line-length": false,
+    "no-empty": false,
+    "object-literal-sort-keys": false,
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"]
+  }
+}

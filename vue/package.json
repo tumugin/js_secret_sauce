@@ -48,6 +48,8 @@
     "shelljs": "^0.8.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.4",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
